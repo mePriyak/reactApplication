@@ -49,7 +49,13 @@ this.setState({showPersons: !doesShow});
 }
 
 deletePersonhandler = (personIndex) => {
-console.log(personIndex);
+// const duplicatePersons = this.state.persons; // reference to original persons defined in state object so we will use slice function
+//const duplicatePersons = this.state.persons.slice(); // here we are using slice so that duplicatePerson doesnot point back to original value 
+const duplicatePersons = [...this.state.persons]; // this is es6 approach that is using spread operator to get the objects of the array and not the actual array itself
+duplicatePersons.splice(personIndex,1); // modifying this duplicate array but what splice does is it mutates actual data
+this.setState({
+persons:duplicatePersons //assigning value of the modified array in setstate method setstate is update DOM
+});
 }
  /**********************this was for assignment starts**************************/
 // usernameChangedHandler = (event) => {
@@ -72,7 +78,7 @@ console.log(personIndex);
   if (this.state.showPersons) {
    persons = (
     <div>
-      {this.state.persons.map((person,index) => {
+      {this.state.persons.map((person,index) => { // passing person and index as parameter to the function
         return <Person 
         name={person.name} 
         age={person.age}
