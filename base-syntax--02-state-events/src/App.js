@@ -84,7 +84,8 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
 
   render () {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font:'inherit',
       border:'1px solid blue',
       padding:'8px',
@@ -117,6 +118,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
       age={this.state.persons[2].age} /> */}
       </div>
    );
+   style.backgroundColor = 'red';
   }
    /******************************handling hide show via javascript way ends**************************/
 
