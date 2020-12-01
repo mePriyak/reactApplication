@@ -12,9 +12,9 @@ class App extends Component {
   /**********************this was for assignment end**************************/
   state = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
+      { id: '1234', name: 'Max', age: 28 },
+      { id: '5678', name: 'Manu', age: 29 },
+      { id: '9737', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
     /* this is for conditional display of div starts */
@@ -34,14 +34,31 @@ class App extends Component {
   //   } )
   // }
 
-  nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Max', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    } )
+  // nameChangedHandler = (event) => {
+  //   this.setState( {
+  //     persons: [
+  //       { name: 'Max', age: 28 },
+  //       { name: event.target.value, age: 29 },
+  //       { name: 'Stephanie', age: 26 }
+  //     ]
+  //   } )
+  // }
+  nameChangedHandler = (event,id) => {
+    const personIndexOnChange = this.state.persons.findIndex ((person) => {
+      return person.id === id;
+    });
+    const personObject = {...this.state.persons[personIndexOnChange]}; // getting the person object with index = personIndexOnChange without mutating the actual data
+    // console.log(personObject);
+    personObject.name = event.target.value;
+    /*instead of creating a copy of changed object and modifying it and then
+    assigning it back to the copied array what we can do is that we can first 
+    create a copy of the persons array and then modify it using below code
+    personArray[personIndexOnChange].name = event.target.value */
+
+    const personArray = [...this.state.persons];
+    personArray[personIndexOnChange] = personObject;
+    // console.log(personArray);
+    this.setState( {persons:personArray} )
   }
 togglePersonHandler = () => {
 const doesShow = this.state.showPersons;
@@ -82,7 +99,10 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
         return <Person 
         name={person.name} 
         age={person.age}
-        click={this.deletePersonhandler.bind(this,index)}/>
+        key={person.id}
+        click={this.deletePersonhandler.bind(this,index)}
+        changed={(event) => this.nameChangedHandler(event,person.id)}
+        />
       })}
     {/* <Person 
       name={this.state.persons[0].name} 
