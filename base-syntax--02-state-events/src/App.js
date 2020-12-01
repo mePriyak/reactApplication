@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -87,7 +87,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
     // the demerit of inline styling is that we cannot use hover.
     const style = {
       backgroundColor: 'green',
-      color: 'white',
+      color: 'black',
       font:'inherit',
       border:'1px solid blue',
       padding:'8px',
@@ -198,6 +198,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
  /**********************this was for assignment ends**************************/
 
   /**********************handling hide show via javascript way starts**************************/
+  <StyleRoot>
       <div className="App">
       <h1>Hi, I'm a React App</h1>
       <p className={classes.join(' ')}>This is really working!</p>
@@ -206,6 +207,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
       onClick={this.togglePersonHandler}>Switch Name</button>
       {persons}
     </div>
+  </StyleRoot>  
    /**********************handling hide show via javascript way ends**************************/
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
