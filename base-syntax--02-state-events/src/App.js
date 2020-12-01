@@ -22,17 +22,17 @@ class App extends Component {
     /* this is for conditional display of div ends*/
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked!');
-    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
-    this.setState( {
-      persons: [
-        { name: newName, age: 28 },
-        { name: 'Manu', age: 29 },
-        { name: 'Stephanie', age: 27 }
-      ]
-    } )
-  }
+  // switchNameHandler = (newName) => {
+  //   // console.log('Was clicked!');
+  //   // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+  //   this.setState( {
+  //     persons: [
+  //       { name: newName, age: 28 },
+  //       { name: 'Manu', age: 29 },
+  //       { name: 'Stephanie', age: 27 }
+  //     ]
+  //   } )
+  // }
 
   nameChangedHandler = (event) => {
     this.setState( {
@@ -43,11 +43,14 @@ class App extends Component {
       ]
     } )
   }
-togglePersonHandler= () => {
+togglePersonHandler = () => {
 const doesShow = this.state.showPersons;
 this.setState({showPersons: !doesShow});
 }
 
+deletePersonhandler = (personIndex) => {
+console.log(personIndex);
+}
  /**********************this was for assignment starts**************************/
 // usernameChangedHandler = (event) => {
 // this.setState({
@@ -69,7 +72,13 @@ this.setState({showPersons: !doesShow});
   if (this.state.showPersons) {
    persons = (
     <div>
-    <Person 
+      {this.state.persons.map((person,index) => {
+        return <Person 
+        name={person.name} 
+        age={person.age}
+        click={this.deletePersonhandler.bind(this,index)}/>
+      })}
+    {/* <Person 
       name={this.state.persons[0].name} 
       age={this.state.persons[0].age} />
     <Person 
@@ -79,7 +88,7 @@ this.setState({showPersons: !doesShow});
       changed={this.nameChangedHandler} >My Hobbies: Racing</Person>
     <Person 
       name={this.state.persons[2].name} 
-      age={this.state.persons[2].age} />
+      age={this.state.persons[2].age} /> */}
       </div>
    );
   }
