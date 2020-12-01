@@ -107,7 +107,7 @@ this.setState({showPersons: !doesShow});
       // </div>
  /**********************this was for previous modules ends*********************************/
 
-  /**********************this was for displaying codes conditionally starts***************/
+  /**********************this was for displaying div conditionally starts***************/
     //   <div className="App">
     //   <h1>Hi, I'm a React App</h1>
     //   <p>This is really working!</p>
@@ -130,7 +130,7 @@ this.setState({showPersons: !doesShow});
     //     </div> : null
     // }
     // </div>
-  /**********************this was for displaying codes conditionally ends***************/
+  /**********************this was for displaying div conditionally ends***************/
 
  /**********************this was for assignment starts**************************/
       // <div className="App">
@@ -139,6 +139,8 @@ this.setState({showPersons: !doesShow});
       //   <UserOutput userName={this.state.userName}/>
       // </div>
  /**********************this was for assignment ends**************************/
+
+  /**********************handling hide show via javascript way starts**************************/
       <div className="App">
       <h1>Hi, I'm a React App</h1>
       <p>This is really working!</p>
@@ -147,6 +149,7 @@ this.setState({showPersons: !doesShow});
       onClick={this.togglePersonHandler}>Switch Name</button>
       {persons}
     </div>
+   /**********************handling hide show via javascript way ends**************************/
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
