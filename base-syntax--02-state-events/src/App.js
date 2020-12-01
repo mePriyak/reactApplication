@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -83,13 +84,18 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
  /**********************this was for assignment ends*******************************/
 
   render () {
+    // the demerit of inline styling is that we cannot use hover.
     const style = {
       backgroundColor: 'green',
       color: 'white',
       font:'inherit',
       border:'1px solid blue',
       padding:'8px',
-      cursor:'pointer'
+      cursor:'pointer',
+      ':hover': {
+        backgroundColor: 'blue',
+        color: 'yellow'
+      }
     };
      /**********************handling hide show via javascript way starts**************************/
   var persons = null;
@@ -119,9 +125,23 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
       </div>
    );
    style.backgroundColor = 'red';
+   style[':hover'] = {
+    backgroundColor: 'yellow',
+    color: 'blue'
+   };
   }
-   /******************************handling hide show via javascript way ends**************************/
+  /* use npm update react react-dom if we get any error like :
+'TypeError: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContext is not a function'*/
 
+   /******************************handling hide show via javascript way ends**************************/
+  // let classes = ["red","bold"].join(' ');
+      const classes = [];
+      if (this.state.persons.length <=2) {
+        classes.push("red");
+      }
+      if (this.state.persons.length <=1) {
+        classes.push("bold");
+      }
     return (
       /**********************this was for previous modules starts**************************/
       // <div className="App">
@@ -180,7 +200,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
   /**********************handling hide show via javascript way starts**************************/
       <div className="App">
       <h1>Hi, I'm a React App</h1>
-      <p>This is really working!</p>
+      <p className={classes.join(' ')}>This is really working!</p>
       <button 
       style={style}
       onClick={this.togglePersonHandler}>Switch Name</button>
@@ -192,4 +212,4 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
   }
 }
 
-export default App;
+export default Radium(App); // component wrapping our component with some additional functionalities
