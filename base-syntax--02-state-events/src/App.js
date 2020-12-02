@@ -215,3 +215,5 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
 }
 
 export default Radium(App); // component wrapping our component with some additional functionalities
+// use npm install --save styled-components to use styled-components for css.
+// to use styled-components we need to remove all the changes done for radium.
