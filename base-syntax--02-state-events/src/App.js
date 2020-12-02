@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
+// import Radium, {StyleRoot} from 'radium'; we will use this import if we use Radium for styling
+import styled from 'styled-components';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
+
+const StyledButton = styled.button`
+  background-color: ${props => props.$alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: ${props => props.$alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 
 class App extends Component {
  /**********************this was for assignment starts**************************/
@@ -84,19 +99,19 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
  /**********************this was for assignment ends*******************************/
 
   render () {
-    // the demerit of inline styling is that we cannot use hover.
-    const style = {
-      backgroundColor: 'green',
-      color: 'black',
-      font:'inherit',
-      border:'1px solid blue',
-      padding:'8px',
-      cursor:'pointer',
-      ':hover': {
-        backgroundColor: 'blue',
-        color: 'yellow'
-      }
-    };
+    // the demerit of inline styling is that we cannot use hover and for that we needto use 3rd party libraries.
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'black',
+    //   font:'inherit',
+    //   border:'1px solid blue',
+    //   padding:'8px',
+    //   cursor:'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'blue',
+    //     color: 'yellow'
+    //   }
+    // };
      /**********************handling hide show via javascript way starts**************************/
   var persons = null;
   if (this.state.showPersons) {
@@ -124,11 +139,11 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
       age={this.state.persons[2].age} /> */}
       </div>
    );
-   style.backgroundColor = 'red';
-   style[':hover'] = {
-    backgroundColor: 'yellow',
-    color: 'blue'
-   };
+  //  style.backgroundColor = 'red';
+  //  style[':hover'] = {
+  //   backgroundColor: 'yellow',
+  //   color: 'blue'
+  //  };
   }
   /* use npm update react react-dom if we get any error like :
 'TypeError: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContext is not a function'*/
@@ -198,22 +213,27 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
  /**********************this was for assignment ends**************************/
 
   /**********************handling hide show via javascript way starts**************************/
-  <StyleRoot>
+  // <StyleRoot> we use styleroot only while using
       <div className="App">
       <h1>Hi, I'm a React App</h1>
       <p className={classes.join(' ')}>This is really working!</p>
-      <button 
+      {/* <button 
       style={style}
-      onClick={this.togglePersonHandler}>Switch Name</button>
+      onClick={this.togglePersonHandler}>Switch Name</button> <---- this code is used if we donot use 
+      styled-component*/}
+      <StyledButton $alt={this.state.showPersons} onClick={this.togglePersonHandler}> 
+      {/* we are using $alt to prevent the error Received `false` for a non-boolean attribute */}
+        Toggle Persons
+      </StyledButton>
       {persons}
     </div>
-  </StyleRoot>  
+  // </StyleRoot>  
    /**********************handling hide show via javascript way ends**************************/
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
-
-export default Radium(App); // component wrapping our component with some additional functionalities
-// use npm install --save styled-components to use styled-components for css.
-// to use styled-components we need to remove all the changes done for radium.
+export default App; 
+/*export default Radium(App); // component wrapping our component with some additional functionalities
+use npm install --save styled-components to use styled-components for css.
+to use styled-components we need to remove all the changes done for radium.*/
