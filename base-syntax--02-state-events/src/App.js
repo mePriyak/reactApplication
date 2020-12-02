@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 // import Radium, {StyleRoot} from 'radium'; we will use this import if we use Radium for styling
 import styled from 'styled-components';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
-const StyledButton = styled.button`
-  background-color: ${props => props.$alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
+// const StyledButton = styled.button`
+//   background-color: ${props => props.$alt ? 'red' : 'green'};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid blue;
+//   padding: 8px;
+//   cursor: pointer;
   
-  &:hover {
-    background-color: ${props => props.$alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-`;
+//   &:hover {
+//     background-color: ${props => props.$alt ? 'salmon' : 'lightgreen'};
+//     color: black;
+//   }
+// `;
 
 class App extends Component {
  /**********************this was for assignment starts**************************/
@@ -114,6 +114,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
     // };
      /**********************handling hide show via javascript way starts**************************/
   var persons = null;
+  let buttonClass=[classes.Button]; // we can have let buttonClass='' if we wrap it around App in our css
   if (this.state.showPersons) {
    persons = (
     <div>
@@ -139,23 +140,25 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
       age={this.state.persons[2].age} /> */}
       </div>
    );
-  //  style.backgroundColor = 'red';
-  //  style[':hover'] = {
-  //   backgroundColor: 'yellow',
-  //   color: 'blue'
-  //  };
+   /* we use this code with Radium package
+   style.backgroundColor = 'red'; 
+   style[':hover'] = {
+    backgroundColor: 'yellow',
+    color: 'blue'
+   };*/
+   buttonClass.push(classes.Red);
   }
   /* use npm update react react-dom if we get any error like :
 'TypeError: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createContext is not a function'*/
 
    /******************************handling hide show via javascript way ends**************************/
   // let classes = ["red","bold"].join(' ');
-      const classes = [];
+      const assignedClasses = [];
       if (this.state.persons.length <=2) {
-        classes.push("red");
+        assignedClasses.push(classes.red);
       }
       if (this.state.persons.length <=1) {
-        classes.push("bold");
+        assignedClasses.push(classes.bold);
       }
     return (
       /**********************this was for previous modules starts**************************/
@@ -214,17 +217,20 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
 
   /**********************handling hide show via javascript way starts**************************/
   // <StyleRoot> we use styleroot only while using
-      <div className="App">
+      <div className={classes.App}>
       <h1>Hi, I'm a React App</h1>
-      <p className={classes.join(' ')}>This is really working!</p>
-      {/* <button 
-      style={style}
-      onClick={this.togglePersonHandler}>Switch Name</button> <---- this code is used if we donot use 
-      styled-component*/}
-      <StyledButton $alt={this.state.showPersons} onClick={this.togglePersonHandler}> 
-      {/* we are using $alt to prevent the error Received `false` for a non-boolean attribute */}
+      <p className={assignedClasses.join(' ')}>This is really working!</p>
+
+       {/*we will be using claasName instead of style because we are using external css file */}
+
+      <button className={buttonClass.join(' ')}
+      onClick={this.togglePersonHandler}>Switch Name</button> 
+
+      {/*this code is used if we use styled-component
+       <StyledButton $alt={this.state.showPersons} onClick={this.togglePersonHandler}> 
+       we are using $alt to prevent the error Received `false` for a non-boolean attribute
         Toggle Persons
-      </StyledButton>
+      </StyledButton> */}
       {persons}
     </div>
   // </StyleRoot>  
