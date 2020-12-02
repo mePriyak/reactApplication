@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
 // import Radium, {StyleRoot} from 'radium'; we will use this import if we use Radium for styling
-import styled from 'styled-components';
+// import styled from 'styled-components';
 // import UserInput from './UserInput/UserInput';
 // import UserOutput from './UserOutput/UserOutput';
 
@@ -118,7 +118,10 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
   if (this.state.showPersons) {
    persons = (
     <div>
-      {this.state.persons.map((person,index) => { // passing person and index as parameter to the function
+      <Persons persons={this.state.persons}
+      clicked = {this.deletePersonhandler}
+      changed= {this.nameChangedHandler}/>
+      {/* {this.state.persons.map((person,index) => { // passing person and index as parameter to the function
         return <Person 
         name={person.name} 
         age={person.age}
@@ -126,7 +129,7 @@ persons:duplicatePersons //assigning value of the modified array in setstate met
         click={this.deletePersonhandler.bind(this,index)}
         changed={(event) => this.nameChangedHandler(event,person.id)}
         />
-      })}
+      })} */}
     {/* <Person 
       name={this.state.persons[0].name} 
       age={this.state.persons[0].age} />
